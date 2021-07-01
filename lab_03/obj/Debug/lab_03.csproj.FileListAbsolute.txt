@@ -106,3 +106,8 @@ E:\web_th\lab_03\lab_03\obj\Debug\lab_03.csproj.CoreCompileInputs.cache
 E:\web_th\lab_03\lab_03\obj\Debug\lab_03.csproj.CopyComplete
 E:\web_th\lab_03\lab_03\obj\Debug\lab_03.dll
 E:\web_th\lab_03\lab_03\obj\Debug\lab_03.pdb
+E:\web_th\lab_03\lab_03\obj\Debug\lab_03.Migrations.InitialModel.resources
+E:\web_th\lab_03\lab_03\obj\Debug\lab_03.csproj.GenerateResource.cache
+E:\web_th\lab_03\lab_03\obj\Debug\lab_03.Migrations.CreateTableCourse.resources
+E:\web_th\lab_03\lab_03\obj\Debug\lab_03.Migrations.PopulateCategoryTable.resources
+E:\web_th\lab_03\lab_03\obj\Debug\lab_03.Migrations.AddNameColumnToApplicationUser.resources
