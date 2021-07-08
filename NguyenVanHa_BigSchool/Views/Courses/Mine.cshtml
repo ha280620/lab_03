@@ -33,9 +33,7 @@
                     <a href="@Url.Action("Edit","Courses", new { id = course.Id })">
                         EDIT
                     </a> |
-                    <a  href="#" class="js-cancel-course" data-course-id="@course.Id" >
-                        DELETE
-                    </a>
+                    <a data-course-id="@course.Id" href="#" class="js-cancel-course">Delete</a>
                 </div>
             </li>
         }

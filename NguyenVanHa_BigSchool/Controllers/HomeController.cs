@@ -24,12 +24,14 @@ namespace NguyenVanHa_BigSchool.Controllers
                 .Include(c => c.Category)
                 .Where(c => c.DateTime > DateTime.Now);
 
+            var userId = User.Identity.GetUserId();
             var viewModel = new CoursesViewModel
             {
                 UpcommingCourses = upcommingCourses, //chú ý
-                ShowAction = User.Identity.IsAuthenticated
-                //Followings = _dbContext.Followings.Where(f => userId != null && f.FolloweeId == userId).ToList(),
-                //Attendances = _dbContext.Attendances.Include(a => a.Course).ToList()
+                ShowAction = User.Identity.IsAuthenticated,
+                //------------------THEM----------------
+                Followings = _dbContext.Followings.Where(f => userId != null && f.FolloweeId == userId).ToList(),
+                Attendances = _dbContext.Attendances.Include(a => a.Course).ToList()
 
             };
 

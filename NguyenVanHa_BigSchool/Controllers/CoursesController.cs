@@ -30,6 +30,8 @@ namespace NguyenVanHa_BigSchool.Controllers
             return View(viewModel);
         }
 
+
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -62,7 +64,8 @@ namespace NguyenVanHa_BigSchool.Controllers
                 .Select(a => a.Course)
                 .Include(l => l.Lecturer)
                 .Include(l => l.Category)
-                //.Where(a => a.IsCanceled == false)
+                //THEM
+                .Where(a => a.IsCanceled == false)
                 .ToList();
 
             var viewModel = new CoursesViewModel
@@ -74,7 +77,6 @@ namespace NguyenVanHa_BigSchool.Controllers
             return View(viewModel);
         }
 
-        [Authorize]
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
@@ -109,6 +111,60 @@ namespace NguyenVanHa_BigSchool.Controllers
             return View("Create", viewModel);
 
         }
+        //gio tao code thu giong nhhu edit
+        //==================================================================
+        //[Authorize]
+        //public ActionResult Delete(int id)
+        //{
+
+        //    var userId = User.Identity.GetUserId();
+
+        //    var course = _dbContext.Courses.Single(c => c.Id == id && c.LecturerId == userId);
+          
+        //        if (course != null)
+        //        {
+        //            try
+        //            {
+                       
+                      
+        //                    _dbContext.Courses.Remove(course);
+        //                    _dbContext.SaveChanges();
+        //        }
+        //        catch (Exception EX) { }
+        //            return RedirectToAction("Mine", "Courses");
+        //             }
+        //         return HttpNotFound();             
+               
+
+          
+        //    }
+            
+            
+
+
+
+
+            
+//==================================================================
+        
+
+        //public ActionResult Cancel(int id)
+        //{
+        //    var userId = User.Identity.GetUserId();
+        //    var course = _dbContext.Courses.Single(c => c.Id == id && c.LecturerId == userId);
+
+        //    //if (course.IsCanceled)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+        //    //course.IsCanceled = true;
+        //    _dbContext.Courses.Remove(course);
+        //    //_dbContext.SaveChanges();
+
+        //    //return Ok();
+        //    return RedirectToAction("Index");
+
+        //}
 
 
         [Authorize]
@@ -132,6 +188,52 @@ namespace NguyenVanHa_BigSchool.Controllers
             _dbContext.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+
+
+        //--------------------THEM--------------------------//
+        public ActionResult FollowingMeList()
+        {
+            var userId = User.Identity.GetUserId();
+            var followings = _dbContext.Followings
+                .Where(a => a.FollowerId == userId)
+                .Select(a => a.Followee)
+                .ToList();
+
+            var viewModel = new FollowingViewModel
+            {
+                Followings = followings,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
+        }
+
+        public ActionResult FollowNotification()
+        {
+            var viewModel = new FollowNotificationViewModel
+            {
+                Notifications = _dbContext.FollowingNotifications.ToList()
+            };
+
+            return View(viewModel);
+        }
+
+        public ActionResult Following()
+        {
+            var userId = User.Identity.GetUserId();
+            var followings = _dbContext.Followings
+                .Where(a => a.FolloweeId == userId)
+                .Select(a => a.Follower)
+                .ToList();
+
+            var viewModel = new FollowingViewModel
+            {
+                Followings = followings,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+
+            return View(viewModel);
         }
 
     }

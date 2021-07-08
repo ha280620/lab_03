@@ -29,7 +29,10 @@ namespace NguyenVanHa_BigSchool.Controllers.Api
                 return NotFound();
             }
             course.IsCanceled = true;
+
             _dbContext.SaveChanges();
+
+
             return Ok();
 
         }
